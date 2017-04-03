@@ -38,7 +38,7 @@ public class MediaCollectionMain {
 
 	private void initDependencyInjection() {
 		applicationContext = new ClassPathXmlApplicationContext(
-				"com/jeff/mediacollection/main/ioc/application-context.xml");
+				"com/jeff/booktracker/main/ioc/application-context.xml");
 	}
 
 }

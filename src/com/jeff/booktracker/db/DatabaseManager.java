@@ -7,7 +7,7 @@ import com.jeff.booktracker.lifecycle.Initializable;
 
 public class DatabaseManager implements Initializable, Disposable {
 
-	private static final String DATABASE_PATH = "C:\\Code\\MediaHistory\\workspace\\MediaCollection\\mysql\\bin\\";
+	private static final String DATABASE_PATH = "C:\\Code\\BookTracker\\eclipse\\workspace\\BookTracker\\mysql\\bin\\";
 	private static final String DATABASE_START_CMD = "mysqld.exe";
 	private static final String DATABASE_SHUTDOWN_CMD = "taskkill";
 	private Process databaseProcess;
@@ -26,10 +26,10 @@ public class DatabaseManager implements Initializable, Disposable {
 
 	@Override
 	public void dispose() {
-		if (databaseProcess != null){
+		if (databaseProcess != null) {
 			// database process was created my this application
 			databaseProcess.destroy();
-		}else{
+		} else {
 			// try to kill a potential dangling database process
 			ProcessBuilder pb = new ProcessBuilder(DATABASE_SHUTDOWN_CMD, "/im", DATABASE_START_CMD, "/f");
 			try {
@@ -38,8 +38,7 @@ public class DatabaseManager implements Initializable, Disposable {
 				System.out.println(e.toString());
 			}
 		}
-		
-		
+
 	}
 
 }

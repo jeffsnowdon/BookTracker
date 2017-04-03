@@ -4,12 +4,30 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="applicationInitializer"
-		class="com.jeff.booktracker.lifecycle.ApplicationInitializer">
+	<bean id="applicationInitializer" class="com.jeff.booktracker.lifecycle.ApplicationInitializer">
 		<constructor-arg index="0" ref="databaseManager" />
+		<constructor-arg index="1" ref="guiInitializer" />
 	</bean>
 
 	<bean id="databaseManager" class="com.jeff.booktracker.db.DatabaseManager" />
+
+	<bean id="guiInitializer" class="com.jeff.booktracker.lifecycle.ui.GUIInitializer">
+		<constructor-arg index="0" ref="bookTrackerMainPanel" />
+	</bean>
+
+	<bean id="bookTrackerMainPanel" class="com.jeff.booktracker.ui.BookTrackerMainPanel">
+		<constructor-arg index="0" ref="bookshelfPanel" />
+	</bean>
+
+	<bean id="bookshelfPanel" class="com.jeff.booktracker.bookshelf.ui.BookshelfPanel">
+		<constructor-arg index="0" ref="bookshelfTableModel" />
+		<constructor-arg index="1" ref="bookshelfActionPanel" />
+	</bean>
+
+	<bean id="bookshelfTableModel"
+		class="com.jeff.booktracker.bookshelf.ui.table.model.BookshelfTableModel" />
+
+	<bean id="bookshelfActionPanel" class="com.jeff.booktracker.bookshelf.ui.BookshelfActionPanel" />
 
 
 </beans>
