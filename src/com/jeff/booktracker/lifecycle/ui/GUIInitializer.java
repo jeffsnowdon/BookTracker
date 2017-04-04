@@ -17,7 +17,6 @@ public class GUIInitializer implements Initializable {
 
 	@Override
 	public void init() {
-		// JFrame frame = new JFrame("Book Tracker");
 		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		mainFrame.setContentPane(bookTrackerMainPanel);
 		mainFrame.pack();
