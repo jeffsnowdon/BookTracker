@@ -1,13 +1,13 @@
 package com.jeff.booktracker.bookshelf.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Book {
 	private String title;
 	private String author;
-	private Date datePublished;
+	private LocalDate datePublished;
 
-	public Book(String title, String author, Date datePublished) {
+	public Book(String title, String author, LocalDate datePublished) {
 		super();
 		this.title = title;
 		this.author = author;
@@ -30,11 +30,11 @@ public class Book {
 		this.author = author;
 	}
 
-	public Date getDatePublished() {
+	public LocalDate getDatePublished() {
 		return datePublished;
 	}
 
-	public void setDatePublished(Date datePublished) {
+	public void setDatePublished(LocalDate datePublished) {
 		this.datePublished = datePublished;
 	}
 

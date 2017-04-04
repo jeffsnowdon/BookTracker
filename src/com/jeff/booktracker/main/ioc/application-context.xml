@@ -12,7 +12,8 @@
 	<bean id="databaseManager" class="com.jeff.booktracker.db.DatabaseManager" />
 
 	<bean id="guiInitializer" class="com.jeff.booktracker.lifecycle.ui.GUIInitializer">
-		<constructor-arg index="0" ref="bookTrackerMainPanel" />
+		<constructor-arg index="0" ref="mainFrame" />
+		<constructor-arg index="1" ref="bookTrackerMainPanel" />
 	</bean>
 
 	<bean id="bookTrackerMainPanel" class="com.jeff.booktracker.ui.BookTrackerMainPanel">
@@ -27,7 +28,22 @@
 	<bean id="bookshelfTableModel"
 		class="com.jeff.booktracker.bookshelf.ui.table.model.BookshelfTableModel" />
 
-	<bean id="bookshelfActionPanel" class="com.jeff.booktracker.bookshelf.ui.BookshelfActionPanel" />
+	<bean id="bookshelfActionPanel" class="com.jeff.booktracker.bookshelf.ui.BookshelfActionPanel">
+		<constructor-arg index="0" ref="mainFrame" />
+		<constructor-arg index="1" ref="addBookDialog" />
+	</bean>
 
+	<bean id="mainFrame" class="javax.swing.JFrame">
+	<constructor-arg index="0">
+		<value>Book Tracker</value>
+	</constructor-arg>
+	</bean>
+
+	<bean id="addBookDialog" class="com.jeff.booktracker.bookshelf.ui.add.AddBookDialog">
+		<constructor-arg index="0" ref="mainFrame" />
+		<constructor-arg index="1" ref="addBookPanel" />
+	</bean>
+
+	<bean id="addBookPanel" class="com.jeff.booktracker.bookshelf.ui.add.AddBookPanel"></bean>
 
 </beans>
