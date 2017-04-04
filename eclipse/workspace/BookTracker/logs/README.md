@@ -1,1 +1,1 @@
-#Logs produed by the application go here.
+# Logs produed by the application go here.
