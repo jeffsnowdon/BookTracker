@@ -2,7 +2,8 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd"
+	   					   default-lazy-init="true">
 
 	<bean id="applicationInitializer" class="com.jeff.booktracker.lifecycle.ApplicationInitializer">
 		<constructor-arg index="0" ref="databaseManager" />
@@ -34,9 +35,9 @@
 	</bean>
 
 	<bean id="mainFrame" class="javax.swing.JFrame">
-	<constructor-arg index="0">
-		<value>Book Tracker</value>
-	</constructor-arg>
+		<constructor-arg index="0">
+			<value>Book Tracker</value>
+		</constructor-arg>
 	</bean>
 
 	<bean id="addBookDialog" class="com.jeff.booktracker.bookshelf.ui.add.AddBookDialog">
@@ -45,5 +46,38 @@
 	</bean>
 
 	<bean id="addBookPanel" class="com.jeff.booktracker.bookshelf.ui.add.AddBookPanel"></bean>
+
+	<bean id="dbInitializer" class="com.jeff.booktracker.db.DBInitializer">
+		<constructor-arg index="0" ref="dbCommandSupplier" />
+	</bean>
+
+	<bean id="dbCommandSupplier" parent="beanSupplier" >
+		<constructor-arg index="0">
+			<value type="java.lang.Class">com.jeff.booktracker.db.DBCommand</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="beanSupplier" abstract="true" class="com.jeff.booktracker.main.util.BeanSupplier"
+		scope="prototype" />
+		
+	<!-- 
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/booktracker" />
+		<property name="username" value="root" />
+		<property name="password" value="password" />
+	</bean>
+	-->
+	
+	<bean id="mySQLSupplier" class="com.jeff.booktracker.main.util.MySQLSupplier">
+	</bean>
+	
+	<bean id="mySQL" factory-bean="mySQLSupplier" factory-method="get"/>
+		
+	<bean id="addBooktrackerDatabase" class="com.jeff.booktracker.db.DefaultDBCommand">
+		<constructor-arg index="0" ref="mySQL" />
+		<constructor-arg index="1" value="com/jeff/booktracker/db/sql/add_booktracker_database.sql" />
+	</bean>
 
 </beans>
