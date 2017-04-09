@@ -25,7 +25,6 @@ public class DatabaseManager implements Initializable, Disposable, BeanFactoryAw
 
 	@Override
 	public void init() {
-		logger.severe("Test");
 		ProcessBuilder pb = new ProcessBuilder(DATABASE_PATH + DATABASE_START_CMD);
 		try {
 			databaseProcess = pb.start();
