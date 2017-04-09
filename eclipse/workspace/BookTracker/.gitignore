@@ -1,3 +1,4 @@
 mysql
 target
 .settings
+logs/*
