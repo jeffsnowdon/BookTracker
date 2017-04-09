@@ -20,7 +20,7 @@ public class DatabaseManager implements Initializable, Disposable {
 		try {
 			databaseProcess = pb.start();
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			logger.severe("Error starting database: " + e.toString());
 		}
 	}
 
