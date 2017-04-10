@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="true">
+
+	<bean id="mainFrame" class="javax.swing.JFrame">
+		<constructor-arg index="0">
+			<value>Book Tracker</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="guiInitializer" class="com.jeff.booktracker.lifecycle.ui.GUIInitializer">
+		<constructor-arg index="0" ref="mainFrame" />
+		<constructor-arg index="1" ref="bookTrackerMainPanel" />
+	</bean>
+
+</beans>
