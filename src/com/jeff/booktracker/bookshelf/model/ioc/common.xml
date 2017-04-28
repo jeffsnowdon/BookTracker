@@ -6,7 +6,7 @@
 	   					   default-lazy-init="true">
 
 	<bean id="bookManager" class="com.jeff.booktracker.bookshelf.model.BookManager">
-		<constructor-arg index="0" ref="bookPersistor" />
+		<constructor-arg index="0" ref="booksPersistor" />
 	</bean>
 
 </beans>

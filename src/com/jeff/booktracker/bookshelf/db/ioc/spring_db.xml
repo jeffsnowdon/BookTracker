@@ -3,20 +3,27 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd"
-	   					   default-lazy-init="true">
+	default-lazy-init="true">
 
 	<bean id="addBooktrackerDatabase" class="com.jeff.booktracker.db.DefaultDBCommand">
 		<constructor-arg index="0" ref="mySQL" />
-		<constructor-arg index="1" value="com/jeff/booktracker/db/sql/add_booktracker_database.sql" />
+		<constructor-arg index="1"
+			value="com/jeff/booktracker/db/sql/add_booktracker_database.sql" />
 	</bean>
-	
+
 	<bean id="addBooksTable" class="com.jeff.booktracker.db.DefaultDBCommand">
 		<constructor-arg index="0" ref="mySQL" />
-		<constructor-arg index="1" value="com/jeff/booktracker/bookshelf/db/sql/add_books_table.sql" />
+		<constructor-arg index="1"
+			value="com/jeff/booktracker/bookshelf/db/sql/add_books_table.sql" />
 	</bean>
-	
-	<bean id="bookPersistor" class="com.jeff.booktracker.bookshelf.db.persistor.BooksPersistor">
+
+	<bean id="booksPersistor"
+		class="com.jeff.booktracker.bookshelf.db.persistor.BooksPersistor">
 		<constructor-arg index="0" ref="mySQL" />
+		<constructor-arg index="1" ref="dateConverter" />
 	</bean>
+
+	<bean id="dateConverter"
+		class="com.jeff.booktracker.bookshelf.db.persistor.util.DateConverter" />
 
 </beans>

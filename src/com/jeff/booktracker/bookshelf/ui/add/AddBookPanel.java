@@ -13,9 +13,9 @@ import com.jeff.booktracker.bookshelf.model.Book;
 
 public class AddBookPanel extends JPanel {
 
-	private JLabel titleLabel = new JLabel("Title");
-	private JLabel authorLabel = new JLabel("Author");
-	private JLabel datePublishedLabel = new JLabel("Date Published");
+	private JLabel titleLabel = new JLabel("Title:");
+	private JLabel authorLabel = new JLabel("Author:");
+	private JLabel datePublishedLabel = new JLabel("Date Published:");
 	private JTextField titleTextField = new JTextField();
 	private JTextField authorTextField = new JTextField();
 	// TODO: this needs to be a date picker
@@ -61,7 +61,7 @@ public class AddBookPanel extends JPanel {
 
 		c.weightx = 1;
 		c.weighty = 1;
-		c.anchor = GridBagConstraints.WEST;
+		c.anchor = GridBagConstraints.EAST;
 
 		c.gridx = 0;
 		c.gridy = 0;

@@ -41,6 +41,7 @@ public class AddBookDialog extends JDialog {
 		add(actionPanel, BorderLayout.SOUTH);
 
 		setMinimumSize(new Dimension(275, 175));
+		setResizable(false);
 	}
 
 	public Book produceBook() {

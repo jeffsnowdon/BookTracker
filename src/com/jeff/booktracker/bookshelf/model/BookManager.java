@@ -1,11 +1,12 @@
 package com.jeff.booktracker.bookshelf.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookManager implements IBookManager {
 
 	private IBookManager booksPersistor;
-	private List<BookChangeListener> eventListeners;
+	private List<BookChangeListener> eventListeners = new ArrayList<>();
 
 	public BookManager(IBookManager booksPersistor) {
 		this.booksPersistor = booksPersistor;
@@ -29,24 +30,35 @@ public class BookManager implements IBookManager {
 	}
 
 	@Override
-	public void addOrUpdate(Book book) {
-		booksPersistor.addOrUpdate(book);
-		fireBookAdded(book);
+	public boolean addOrUpdate(Book book) {
+		boolean success = booksPersistor.addOrUpdate(book);
+		if (success)
+			fireBookAdded(book);
+		return success;
 	}
 
 	@Override
-	public void remove(Book book) {
-		booksPersistor.remove(book);
-		fireBookRemoved(book);
+	public boolean remove(Book book) {
+		boolean success = booksPersistor.remove(book);
+		if (success)
+			fireBookRemoved(book);
+		return success;
 	}
 
 	private void fireBookRemoved(Book book) {
 		eventListeners.stream().forEach(listener -> listener.bookRemoved(book));
 	}
 
+	private void fireRemovedAll() {
+		eventListeners.stream().forEach(listener -> listener.removedAll());
+	}
+
 	@Override
-	public void removeAll() {
-		booksPersistor.removeAll();
+	public boolean removeAll() {
+		boolean success = booksPersistor.removeAll();
+		if (success)
+			fireRemovedAll();
+		return success;
 	}
 
 }

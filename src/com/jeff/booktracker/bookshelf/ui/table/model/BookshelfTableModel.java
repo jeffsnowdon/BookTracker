@@ -6,18 +6,20 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import com.jeff.booktracker.bookshelf.model.Book;
+
 public class BookshelfTableModel extends AbstractTableModel {
 
 	private final String[] columnNames = { "Title", "Author", "Date Published" };
-	private List<BookshelfTableModelElement> elements = new ArrayList<>();
+	private List<Book> elements = new ArrayList<>();
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-	public void addElement(BookshelfTableModelElement element) {
+	public void addElement(Book element) {
 		elements.add(element);
 		fireTableDataChanged();
 	}
 
-	public void removeElement(BookshelfTableModelElement element) {
+	public void removeElement(Book element) {
 		elements.remove(element);
 		fireTableDataChanged();
 	}
@@ -46,11 +48,11 @@ public class BookshelfTableModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-			return elements.get(rowIndex).getBook().getTitle();
+			return elements.get(rowIndex).getTitle();
 		case 1:
-			return elements.get(rowIndex).getBook().getAuthor();
+			return elements.get(rowIndex).getAuthor();
 		case 2:
-			return elements.get(rowIndex).getBook().getDatePublished().format(formatter);
+			return elements.get(rowIndex).getDatePublished().format(formatter);
 		default:
 			return "N/A";
 		}

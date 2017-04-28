@@ -6,10 +6,10 @@ public interface IBookManager {
 
 	public List<Book> get();
 
-	public void addOrUpdate(Book book);
+	public boolean addOrUpdate(Book book);
 
-	public void remove(Book book);
+	public boolean remove(Book book);
 
-	public void removeAll();
+	public boolean removeAll();
 
 }

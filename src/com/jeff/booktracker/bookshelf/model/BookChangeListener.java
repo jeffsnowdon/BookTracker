@@ -6,4 +6,6 @@ public interface BookChangeListener {
 
 	public void bookRemoved(Book book);
 
+	public void removedAll();
+
 }

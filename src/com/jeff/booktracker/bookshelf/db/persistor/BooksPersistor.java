@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.jeff.booktracker.bookshelf.db.persistor.util.DateConverter;
 import com.jeff.booktracker.bookshelf.model.Book;
 import com.jeff.booktracker.bookshelf.model.IBookManager;
 
@@ -21,10 +22,13 @@ public class BooksPersistor implements IBookManager {
 	public static final String DATE_PUBLISHED = "datePublished";
 
 	private Connection dbConnection;
+	// util
+	private DateConverter dateConverter;
 	private Logger logger = Logger.getLogger(this.getClass().getCanonicalName());
 
-	public BooksPersistor(Connection dbConnection) {
+	public BooksPersistor(Connection dbConnection, DateConverter dateConverter) {
 		this.dbConnection = dbConnection;
+		this.dateConverter = dateConverter;
 	}
 
 	@Override
@@ -37,8 +41,8 @@ public class BooksPersistor implements IBookManager {
 			while (rs.next()) {
 				String title = rs.getString(TITLE);
 				String author = rs.getString(AUTHOR);
-				Date datePublished = rs.getDate(DATE_PUBLISHED);
-				books.add(new Book(title, author, datePublished.toLocalDate()));
+				LocalDate datePublished = dateConverter.toLocalDate(rs.getDate(DATE_PUBLISHED));
+				books.add(new Book(title, author, datePublished));
 			}
 
 		} catch (SQLException e) {
@@ -48,51 +52,60 @@ public class BooksPersistor implements IBookManager {
 	}
 
 	@Override
-	public void addOrUpdate(Book book) {
+	public boolean addOrUpdate(Book book) {
 		remove(book);
-		add(book);
+		return add(book);
 	}
 
-	private void add(Book book) {
+	private boolean add(Book book) {
+		boolean success = true;
 		try {
 			Statement statement = dbConnection.createStatement();
 
 			String title = book.getTitle();
 			String author = book.getAuthor();
-			LocalDate datePublished = book.getDatePublished();
-			String query = "INSERT INTO " + TABLE + "(" + TITLE + "," + AUTHOR + "," + DATE_PUBLISHED + ") VALUES ("
-					+ title + "," + author + "," + datePublished + ");";
+			Date datePublished = dateConverter.toSQL(book.getDatePublished());
+			String query = "INSERT INTO " + TABLE + " VALUES (" + "'" + title + "'" + "," + "'" + author + "'" + ","
+					+ "'" + datePublished.toString() + "'" + ");";
 			statement.execute(query);
 
 		} catch (SQLException e) {
 			logger.severe(e.toString());
+			success = false;
 		}
+		return success;
 	}
 
 	@Override
-	public void remove(Book book) {
+	public boolean remove(Book book) {
+		boolean success = true;
 		try {
 			Statement statement = dbConnection.createStatement();
 			String title = book.getTitle();
 			String author = book.getAuthor();
-			LocalDate datePublished = book.getDatePublished();
-			String query = "DELETE FROM " + TABLE + " WHERE " + TITLE + "=" + title + " AND " + AUTHOR + "=" + author
-					+ " AND " + DATE_PUBLISHED + "=" + datePublished + ";";
+			Date datePublished = dateConverter.toSQL(book.getDatePublished());
+			String query = "DELETE FROM " + TABLE + " WHERE " + TITLE + "=" + "'" + title + "'" + " AND " + AUTHOR + "="
+					+ "'" + author + "'" + " AND " + DATE_PUBLISHED + "=" + "'" + datePublished.toString() + "'" + ";";
 			statement.execute(query);
 		} catch (SQLException e) {
 			logger.severe(e.toString());
+			success = false;
 		}
+		return success;
 	}
 
 	@Override
-	public void removeAll() {
+	public boolean removeAll() {
+		boolean success = true;
 		try {
 			Statement statement = dbConnection.createStatement();
 			String query = "DELETE FROM " + TABLE;
 			statement.executeQuery(query);
 		} catch (SQLException e) {
 			logger.severe(e.toString());
+			success = false;
 		}
+		return success;
 	}
 
 }
