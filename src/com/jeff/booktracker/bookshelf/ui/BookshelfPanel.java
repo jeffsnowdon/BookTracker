@@ -36,8 +36,7 @@ public class BookshelfPanel extends JPanel {
 		addListeners();
 	}
 
-	public void addListeners(){
-		bookManager.
+	public void addListeners() {
 	}
 
 	private void updateValues() {
