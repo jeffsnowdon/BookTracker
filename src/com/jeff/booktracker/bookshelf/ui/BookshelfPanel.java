@@ -1,13 +1,13 @@
 package com.jeff.booktracker.bookshelf.ui;
 
 import java.awt.BorderLayout;
-import java.time.LocalDate;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import com.jeff.booktracker.bookshelf.model.Book;
+import com.jeff.booktracker.bookshelf.model.BookManager;
 import com.jeff.booktracker.bookshelf.ui.table.model.BookshelfTableModel;
 import com.jeff.booktracker.bookshelf.ui.table.model.BookshelfTableModelElement;
 
@@ -19,19 +19,27 @@ public class BookshelfPanel extends JPanel {
 	private BookshelfActionPanel bookshelfActionPanel;
 	// model
 	private BookshelfTableModel bookshelfTableModel;
+	private BookManager bookManager;
 
-	public BookshelfPanel(BookshelfTableModel bookshelfTableModel, BookshelfActionPanel bookshelfActionPanel) {
+	public BookshelfPanel(BookshelfTableModel bookshelfTableModel, BookshelfActionPanel bookshelfActionPanel,
+			BookManager bookManager) {
 		this.bookshelfTableModel = bookshelfTableModel;
 		this.bookshelfActionPanel = bookshelfActionPanel;
+		this.bookManager = bookManager;
 		init();
 	}
 
 	private void init() {
 		setupComponents();
 		setupContainer();
-		for (int i = 0; i < 100; i++)
-			bookshelfTableModel
-					.addElement(new BookshelfTableModelElement(new Book("Programming", "Jeff", LocalDate.now())));
+		updateValues();
+	}
+
+	private void updateValues() {
+		bookshelfTableModel.removeAllElements();
+		for (Book book : bookManager.get()) {
+			bookshelfTableModel.addElement(new BookshelfTableModelElement(book));
+		}
 	}
 
 	private void setupComponents() {

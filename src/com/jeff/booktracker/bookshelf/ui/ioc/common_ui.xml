@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-lazy-init="true">
+
+	<bean id="bookTrackerMainPanel" class="com.jeff.booktracker.ui.BookTrackerMainPanel">
+		<constructor-arg index="0" ref="bookshelfPanel" />
+	</bean>
+
+	<bean id="bookshelfPanel" class="com.jeff.booktracker.bookshelf.ui.BookshelfPanel">
+		<constructor-arg index="0" ref="bookshelfTableModel" />
+		<constructor-arg index="1" ref="bookshelfActionPanel" />
+		<constructor-arg index="2" ref="bookManager" />
+	</bean>
+
+	<bean id="bookshelfTableModel"
+		class="com.jeff.booktracker.bookshelf.ui.table.model.BookshelfTableModel" />
+
+	<bean id="bookshelfActionPanel" class="com.jeff.booktracker.bookshelf.ui.BookshelfActionPanel">
+		<constructor-arg index="0" ref="mainFrame" />
+		<constructor-arg index="1" ref="addBookDialog" />
+	</bean>
+
+	<bean id="addBookDialog" class="com.jeff.booktracker.bookshelf.ui.add.AddBookDialog">
+		<constructor-arg index="0" ref="mainFrame" />
+		<constructor-arg index="1" ref="addBookPanel" />
+	</bean>
+
+	<bean id="addBookPanel" class="com.jeff.booktracker.bookshelf.ui.add.AddBookPanel"></bean>
+
+</beans>
