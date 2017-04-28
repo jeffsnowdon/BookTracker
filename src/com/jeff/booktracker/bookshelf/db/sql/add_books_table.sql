@@ -1,4 +1,4 @@
-CREATE TABLE booktracker.books (
+CREATE TABLE IF NOT EXISTS booktracker.books (
 	title VARCHAR(255) NOT NULL DEFAULT "N/A",
 	author VARCHAR(255) NOT NULL DEFAULT "N/A",
 	datePublished DATE DEFAULT NULL

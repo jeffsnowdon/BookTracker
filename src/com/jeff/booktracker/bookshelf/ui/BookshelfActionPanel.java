@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.jeff.booktracker.bookshelf.model.Book;
+import com.jeff.booktracker.bookshelf.model.IBookManager;
 import com.jeff.booktracker.bookshelf.ui.add.AddBookDialog;
 
 public class BookshelfActionPanel extends JPanel {
@@ -17,10 +19,13 @@ public class BookshelfActionPanel extends JPanel {
 	private JButton addBookButton = new JButton("Add Book");
 	private JButton removeBookButton = new JButton("Remove Book");
 	private AddBookDialog addBookDialog;
+	// model
+	private IBookManager bookManager;
 
-	public BookshelfActionPanel(Frame frame, AddBookDialog addBookDialog) {
+	public BookshelfActionPanel(Frame frame, AddBookDialog addBookDialog, IBookManager bookManager) {
 		this.frame = frame;
 		this.addBookDialog = addBookDialog;
+		this.bookManager = bookManager;
 		init();
 	}
 
@@ -39,7 +44,9 @@ public class BookshelfActionPanel extends JPanel {
 				addBookDialog.setLocationRelativeTo(frame);
 				addBookDialog.setVisible(true);
 				if (addBookDialog.getOKPressed()) {
-					System.out.println("OK Pressed");
+					Book book = addBookDialog.produceBook();
+					if (book != null)
+						bookManager.addOrUpdate(book);
 				}
 			}
 		});

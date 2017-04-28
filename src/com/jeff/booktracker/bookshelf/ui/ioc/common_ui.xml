@@ -21,6 +21,7 @@
 	<bean id="bookshelfActionPanel" class="com.jeff.booktracker.bookshelf.ui.BookshelfActionPanel">
 		<constructor-arg index="0" ref="mainFrame" />
 		<constructor-arg index="1" ref="addBookDialog" />
+		<constructor-arg index="2" ref="bookManager" />
 	</bean>
 
 	<bean id="addBookDialog" class="com.jeff.booktracker.bookshelf.ui.add.AddBookDialog">

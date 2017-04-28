@@ -62,7 +62,7 @@ public class BooksPersistor implements IBookManager {
 			LocalDate datePublished = book.getDatePublished();
 			String query = "INSERT INTO " + TABLE + "(" + TITLE + "," + AUTHOR + "," + DATE_PUBLISHED + ") VALUES ("
 					+ title + "," + author + "," + datePublished + ");";
-			statement.executeQuery(query);
+			statement.execute(query);
 
 		} catch (SQLException e) {
 			logger.severe(e.toString());
@@ -78,7 +78,7 @@ public class BooksPersistor implements IBookManager {
 			LocalDate datePublished = book.getDatePublished();
 			String query = "DELETE FROM " + TABLE + " WHERE " + TITLE + "=" + title + " AND " + AUTHOR + "=" + author
 					+ " AND " + DATE_PUBLISHED + "=" + datePublished + ";";
-			statement.executeQuery(query);
+			statement.execute(query);
 		} catch (SQLException e) {
 			logger.severe(e.toString());
 		}

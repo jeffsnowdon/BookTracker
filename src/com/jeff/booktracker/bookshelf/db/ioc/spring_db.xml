@@ -10,6 +10,11 @@
 		<constructor-arg index="1" value="com/jeff/booktracker/db/sql/add_booktracker_database.sql" />
 	</bean>
 	
+	<bean id="addBooksTable" class="com.jeff.booktracker.db.DefaultDBCommand">
+		<constructor-arg index="0" ref="mySQL" />
+		<constructor-arg index="1" value="com/jeff/booktracker/bookshelf/db/sql/add_books_table.sql" />
+	</bean>
+	
 	<bean id="bookPersistor" class="com.jeff.booktracker.bookshelf.db.persistor.BooksPersistor">
 		<constructor-arg index="0" ref="mySQL" />
 	</bean>

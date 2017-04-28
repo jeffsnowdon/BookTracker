@@ -1,6 +1,7 @@
 package com.jeff.booktracker.bookshelf.ui.add;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
@@ -10,11 +11,15 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import com.jeff.booktracker.bookshelf.model.Book;
+
 public class AddBookDialog extends JDialog {
 
+	// state
+	private boolean okPressed = false;
+	// ui
 	private AddBookPanel addBookPanel;
 	private AddBookActionPanel actionPanel = new AddBookActionPanel();
-	private boolean okPressed = false;
 
 	public AddBookDialog(Frame frame, AddBookPanel addBookPanel) {
 		super(frame, "Add Book");
@@ -34,6 +39,12 @@ public class AddBookDialog extends JDialog {
 		setLayout(new BorderLayout());
 		add(addBookPanel, BorderLayout.CENTER);
 		add(actionPanel, BorderLayout.SOUTH);
+
+		setMinimumSize(new Dimension(275, 175));
+	}
+
+	public Book produceBook() {
+		return addBookPanel.produceBook();
 	}
 
 	private class AddBookActionPanel extends JPanel {
@@ -73,8 +84,7 @@ public class AddBookDialog extends JDialog {
 			setLayout(new FlowLayout(FlowLayout.RIGHT));
 			add(okButton);
 			add(cancelButton);
+
 		}
-
 	}
-
 }

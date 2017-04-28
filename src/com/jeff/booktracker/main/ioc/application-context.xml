@@ -10,7 +10,7 @@
 	<import resource="classpath*:com/jeff/booktracker/**/spring_db.xml" />
 
 	<bean id="applicationInitializer" class="com.jeff.booktracker.lifecycle.ApplicationInitializer">
-		<constructor-arg index="0" ref="databaseManager" />
+		<constructor-arg index="0" ref="guiInitializer" />
 	</bean>
 
 	<bean id="dbInitializer" class="com.jeff.booktracker.db.DBInitializer">

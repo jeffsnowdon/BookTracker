@@ -6,11 +6,13 @@ import java.util.logging.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.jeff.booktracker.db.DatabaseManager;
 import com.jeff.booktracker.lifecycle.Initializable;
 
 public class MediaCollectionMain {
 
 	private ApplicationContext applicationContext;
+	private DatabaseManager databaseManager;
 
 	public static void main(String[] args) {
 		new MediaCollectionMain();
@@ -27,8 +29,26 @@ public class MediaCollectionMain {
 	}
 
 	public MediaCollectionMain() {
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				shutdownDatabase();
+			}
+		}));
 		initDependencyInjection();
+		startupDatabase();
 		startupApplication();
+	}
+	
+	private void shutdownDatabase() {
+		if (databaseManager != null)
+			databaseManager.dispose();
+	}
+	
+	private void startupDatabase(){
+		DatabaseManager databaseManager = (DatabaseManager) applicationContext.getBean("databaseManager");
+		databaseManager.init();
 	}
 
 	private void startupApplication() {
