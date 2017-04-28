@@ -71,14 +71,28 @@ public class BooksPersistor implements IBookManager {
 
 	@Override
 	public void remove(Book book) {
-		// TODO Auto-generated method stub
-
+		try {
+			Statement statement = dbConnection.createStatement();
+			String title = book.getTitle();
+			String author = book.getAuthor();
+			LocalDate datePublished = book.getDatePublished();
+			String query = "DELETE FROM " + TABLE + " WHERE " + TITLE + "=" + title + " AND " + AUTHOR + "=" + author
+					+ " AND " + DATE_PUBLISHED + "=" + datePublished + ";";
+			statement.executeQuery(query);
+		} catch (SQLException e) {
+			logger.severe(e.toString());
+		}
 	}
 
 	@Override
 	public void removeAll() {
-		// TODO Auto-generated method stub
-
+		try {
+			Statement statement = dbConnection.createStatement();
+			String query = "DELETE FROM " + TABLE;
+			statement.executeQuery(query);
+		} catch (SQLException e) {
+			logger.severe(e.toString());
+		}
 	}
 
 }
