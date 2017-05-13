@@ -20,6 +20,7 @@ public class GUIInitializer implements Initializable {
 		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		mainFrame.setContentPane(bookTrackerMainPanel);
 		mainFrame.pack();
+		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);
 	}
 

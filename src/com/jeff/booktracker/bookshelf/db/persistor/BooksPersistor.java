@@ -52,60 +52,37 @@ public class BooksPersistor implements IBookManager {
 	}
 
 	@Override
-	public boolean addOrUpdate(Book book) {
+	public void addOrUpdate(Book book) throws SQLException {
 		remove(book);
-		return add(book);
+		add(book);
 	}
 
-	private boolean add(Book book) {
-		boolean success = true;
-		try {
-			Statement statement = dbConnection.createStatement();
-
-			String title = book.getTitle();
-			String author = book.getAuthor();
-			Date datePublished = dateConverter.toSQL(book.getDatePublished());
-			String query = "INSERT INTO " + TABLE + " VALUES (" + "'" + title + "'" + "," + "'" + author + "'" + ","
-					+ "'" + datePublished.toString() + "'" + ");";
-			statement.execute(query);
-
-		} catch (SQLException e) {
-			logger.severe(e.toString());
-			success = false;
-		}
-		return success;
+	private void add(Book book) throws SQLException {
+		Statement statement = dbConnection.createStatement();
+		String title = book.getTitle();
+		String author = book.getAuthor();
+		Date datePublished = dateConverter.toSQL(book.getDatePublished());
+		String query = "INSERT INTO " + TABLE + " VALUES (" + "'" + title + "'" + "," + "'" + author + "'" + "," + "'"
+				+ datePublished.toString() + "'" + ");";
+		statement.execute(query);
 	}
 
 	@Override
-	public boolean remove(Book book) {
-		boolean success = true;
-		try {
-			Statement statement = dbConnection.createStatement();
-			String title = book.getTitle();
-			String author = book.getAuthor();
-			Date datePublished = dateConverter.toSQL(book.getDatePublished());
-			String query = "DELETE FROM " + TABLE + " WHERE " + TITLE + "=" + "'" + title + "'" + " AND " + AUTHOR + "="
-					+ "'" + author + "'" + " AND " + DATE_PUBLISHED + "=" + "'" + datePublished.toString() + "'" + ";";
-			statement.execute(query);
-		} catch (SQLException e) {
-			logger.severe(e.toString());
-			success = false;
-		}
-		return success;
+	public void remove(Book book) throws SQLException {
+		Statement statement = dbConnection.createStatement();
+		String title = book.getTitle();
+		String author = book.getAuthor();
+		Date datePublished = dateConverter.toSQL(book.getDatePublished());
+		String query = "DELETE FROM " + TABLE + " WHERE " + TITLE + "=" + "'" + title + "'" + " AND " + AUTHOR + "="
+				+ "'" + author + "'" + " AND " + DATE_PUBLISHED + "=" + "'" + datePublished.toString() + "'" + ";";
+		statement.execute(query);
 	}
 
 	@Override
-	public boolean removeAll() {
-		boolean success = true;
-		try {
-			Statement statement = dbConnection.createStatement();
-			String query = "DELETE FROM " + TABLE;
-			statement.executeQuery(query);
-		} catch (SQLException e) {
-			logger.severe(e.toString());
-			success = false;
-		}
-		return success;
+	public void removeAll() throws SQLException {
+		Statement statement = dbConnection.createStatement();
+		String query = "DELETE FROM " + TABLE;
+		statement.executeQuery(query);
 	}
 
 }

@@ -13,6 +13,7 @@
 		<constructor-arg index="0" ref="bookshelfTableModel" />
 		<constructor-arg index="1" ref="bookshelfActionPanel" />
 		<constructor-arg index="2" ref="bookManager" />
+		<constructor-arg index="3" ref="selectedBooksProperty" />
 	</bean>
 
 	<bean id="bookshelfTableModel"
@@ -22,6 +23,7 @@
 		<constructor-arg index="0" ref="mainFrame" />
 		<constructor-arg index="1" ref="addBookDialog" />
 		<constructor-arg index="2" ref="bookManager" />
+		<constructor-arg index="3" ref="selectedBooksProperty" />
 	</bean>
 
 	<bean id="addBookDialog" class="com.jeff.booktracker.bookshelf.ui.add.AddBookDialog">
@@ -29,6 +31,14 @@
 		<constructor-arg index="1" ref="addBookPanel" />
 	</bean>
 
-	<bean id="addBookPanel" class="com.jeff.booktracker.bookshelf.ui.add.AddBookPanel"></bean>
+	<bean id="addBookPanel" class="com.jeff.booktracker.bookshelf.ui.add.AddBookPanel">
+		<constructor-arg index="0" ref="mainFrame"></constructor-arg>
+	</bean>
+
+	<bean id="selectedBooksProperty" class="com.jeff.booktracker.util.Property">
+		<constructor-arg index="0">
+			<bean class="java.util.ArrayList"></bean>
+		</constructor-arg>
+	</bean>
 
 </beans>

@@ -1,15 +1,16 @@
 package com.jeff.booktracker.bookshelf.model;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface IBookManager {
 
 	public List<Book> get();
 
-	public boolean addOrUpdate(Book book);
+	public void addOrUpdate(Book book) throws SQLException;
 
-	public boolean remove(Book book);
+	public void remove(Book book) throws SQLException;
 
-	public boolean removeAll();
+	public void removeAll() throws SQLException;
 
 }

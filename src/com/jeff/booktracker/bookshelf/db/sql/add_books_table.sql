@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS booktracker.books (
 	title VARCHAR(255) NOT NULL DEFAULT "N/A",
 	author VARCHAR(255) NOT NULL DEFAULT "N/A",
-	datePublished DATE DEFAULT NULL
+	datePublished DATE DEFAULT NULL,
+	PRIMARY KEY (title, author)
 )
 ENGINE=INNODB;

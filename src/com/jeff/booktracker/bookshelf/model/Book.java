@@ -38,4 +38,9 @@ public class Book {
 		this.datePublished = datePublished;
 	}
 
+	@Override
+	public String toString() {
+		return "{title: " + title + " author: " + author + " datePublished: " + datePublished.toString() + "}";
+	}
+
 }

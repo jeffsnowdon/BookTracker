@@ -1,6 +1,10 @@
 package com.jeff.booktracker.bookshelf.ui;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.IntStream;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -10,6 +14,7 @@ import com.jeff.booktracker.bookshelf.model.Book;
 import com.jeff.booktracker.bookshelf.model.BookChangeListener;
 import com.jeff.booktracker.bookshelf.model.BookManager;
 import com.jeff.booktracker.bookshelf.ui.table.model.BookshelfTableModel;
+import com.jeff.booktracker.util.IProperty;
 
 public class BookshelfPanel extends JPanel {
 
@@ -20,6 +25,7 @@ public class BookshelfPanel extends JPanel {
 	// model
 	private BookshelfTableModel bookshelfTableModel;
 	private BookManager bookManager;
+	private IProperty<List<Book>> selectedBooksProperty;
 	// listener
 	private BookChangeListener bookChangeListener = new BookChangeListener() {
 
@@ -40,10 +46,11 @@ public class BookshelfPanel extends JPanel {
 	};
 
 	public BookshelfPanel(BookshelfTableModel bookshelfTableModel, BookshelfActionPanel bookshelfActionPanel,
-			BookManager bookManager) {
+			BookManager bookManager, IProperty<List<Book>> selectedBooks) {
 		this.bookshelfTableModel = bookshelfTableModel;
 		this.bookshelfActionPanel = bookshelfActionPanel;
 		this.bookManager = bookManager;
+		this.selectedBooksProperty = selectedBooks;
 		init();
 	}
 
@@ -56,6 +63,16 @@ public class BookshelfPanel extends JPanel {
 
 	public void addListeners() {
 		bookManager.addListener(bookChangeListener);
+		bookshelfTable.getSelectionModel().addListSelectionListener(e -> {
+			if (e.getValueIsAdjusting())
+				return;
+			List<Book> selectedBooks = new ArrayList<>();
+			IntStream.rangeClosed(e.getFirstIndex(), e.getLastIndex())
+					.filter(i -> bookshelfTable.getSelectionModel().isSelectedIndex(i))
+					.mapToObj(i -> bookshelfTableModel.getBookAtRow(i)).filter(Objects::nonNull)
+					.forEach(book -> selectedBooks.add(book));
+			selectedBooksProperty.set(selectedBooks);
+		});
 	}
 
 	private void updateValues() {

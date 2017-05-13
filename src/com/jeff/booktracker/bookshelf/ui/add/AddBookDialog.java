@@ -31,8 +31,12 @@ public class AddBookDialog extends JDialog {
 		setupContainer();
 	}
 
-	public boolean getOKPressed() {
+	public boolean isOKPressed() {
 		return okPressed;
+	}
+
+	public void reset() {
+		okPressed = false;
 	}
 
 	private void setupContainer() {
@@ -76,6 +80,7 @@ public class AddBookDialog extends JDialog {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					okPressed = false;
 					AddBookDialog.this.setVisible(false);
 				}
 			});

@@ -44,6 +44,19 @@ public class BookshelfTableModel extends AbstractTableModel {
 		return columnNames[columnIndex];
 	}
 
+	/**
+	 * Get the Book at the given row index.
+	 * 
+	 * @param rowIndex
+	 *            row index in table
+	 * @return Book or null if no book exists at teh given row
+	 */
+	public Book getBookAtRow(int rowIndex) {
+		if (elements.size() > rowIndex)
+			return elements.get(rowIndex);
+		return null;
+	}
+
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {

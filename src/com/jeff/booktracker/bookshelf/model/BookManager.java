@@ -1,5 +1,6 @@
 package com.jeff.booktracker.bookshelf.model;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,19 +31,16 @@ public class BookManager implements IBookManager {
 	}
 
 	@Override
-	public boolean addOrUpdate(Book book) {
-		boolean success = booksPersistor.addOrUpdate(book);
-		if (success)
-			fireBookAdded(book);
-		return success;
+	public void addOrUpdate(Book book) throws SQLException {
+		booksPersistor.addOrUpdate(book);
+		fireBookRemoved(book);
+		fireBookAdded(book);
 	}
 
 	@Override
-	public boolean remove(Book book) {
-		boolean success = booksPersistor.remove(book);
-		if (success)
-			fireBookRemoved(book);
-		return success;
+	public void remove(Book book) throws SQLException {
+		booksPersistor.remove(book);
+		fireBookRemoved(book);
 	}
 
 	private void fireBookRemoved(Book book) {
@@ -54,11 +52,9 @@ public class BookManager implements IBookManager {
 	}
 
 	@Override
-	public boolean removeAll() {
-		boolean success = booksPersistor.removeAll();
-		if (success)
-			fireRemovedAll();
-		return success;
+	public void removeAll() throws SQLException {
+		booksPersistor.removeAll();
+		fireRemovedAll();
 	}
 
 }
