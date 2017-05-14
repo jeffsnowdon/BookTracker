@@ -14,10 +14,20 @@ public class BookManager implements IBookManager {
 		this.booksPersistor = booksPersistor;
 	}
 
+	/**
+	 * Add a BookChangeListener to this manager.
+	 * 
+	 * @param bookChangeListener
+	 */
 	public void addListener(BookChangeListener bookChangeListener) {
 		eventListeners.add(bookChangeListener);
 	}
 
+	/**
+	 * Remove a BookChangeListener from this manager.
+	 * 
+	 * @param bookChangeListener
+	 */
 	public void removeListener(BookChangeListener bookChangeListener) {
 		eventListeners.remove(bookChangeListener);
 	}

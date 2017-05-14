@@ -1,5 +1,8 @@
 package com.jeff.booktracker.util;
 
+/**
+ * Default IProperty implementation.
+ */
 public class Property<T> implements IProperty<T> {
 
 	private T t;

@@ -33,6 +33,11 @@ public class AddBookDialog extends JDialog {
 		setupContainer();
 	}
 
+	/**
+	 * Check whether the OK button has been pressed.
+	 * 
+	 * @return true if OK was pressed
+	 */
 	public boolean isOKPressed() {
 		return okPressed;
 	}
@@ -46,6 +51,11 @@ public class AddBookDialog extends JDialog {
 		setResizable(false);
 	}
 
+	/**
+	 * Produce a Book based on the current GUI input.
+	 * 
+	 * @return Book object. Null on failure.
+	 */
 	public Book produceBook() {
 		return addBookPanel.produceBook();
 	}

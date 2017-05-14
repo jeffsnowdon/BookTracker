@@ -15,6 +15,11 @@ public class BeanSupplier<T> implements Supplier<T>, ApplicationContextAware {
 		this.beanName = beanName;
 	}
 
+	/**
+	 * New reference to the bean with this supplier's beanName.
+	 * 
+	 * @return bean or null if does not exist
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public T get() {

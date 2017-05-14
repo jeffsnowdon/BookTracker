@@ -61,7 +61,7 @@ public class BookshelfPanel extends JPanel {
 		addListeners();
 	}
 
-	public void addListeners() {
+	private void addListeners() {
 		bookManager.addListener(bookChangeListener);
 		bookshelfTable.getSelectionModel().addListSelectionListener(e -> {
 			if (e.getValueIsAdjusting())

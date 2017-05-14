@@ -34,7 +34,7 @@ public class DefaultDBCommand implements DBCommand {
 		}
 	}
 
-	public String readFileFromClasspath(final String fileName) throws IOException, URISyntaxException {
+	private String readFileFromClasspath(final String fileName) throws IOException, URISyntaxException {
 		return new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource(fileName).toURI())));
 	}
 

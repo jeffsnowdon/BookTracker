@@ -18,6 +18,11 @@ public class BeanListSupplier<T> implements Supplier<List<T>>, ApplicationContex
 		this.classType = classType;
 	}
 
+	/**
+	 * Get all beans that implement this supplier's classType.
+	 * 
+	 * @return list of beans of type T
+	 */
 	@Override
 	public List<T> get() {
 		Map<String, T> map = applicationContext.getBeansOfType(classType);

@@ -38,6 +38,11 @@ public class AddBookPanel extends JPanel {
 		initGUI();
 	}
 
+	/**
+	 * Produce a Book based on the current GUI values.
+	 * 
+	 * @return Book object. Null on failure.
+	 */
 	public Book produceBook() {
 		String title = titleTextField.getText();
 		String author = authorTextField.getText();

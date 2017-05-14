@@ -14,16 +14,31 @@ public class BookshelfTableModel extends AbstractTableModel {
 	private List<Book> elements = new ArrayList<>();
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+	/**
+	 * Add an element.
+	 * 
+	 * @param element
+	 *            element to add
+	 */
 	public void addElement(Book element) {
 		elements.add(element);
 		fireTableDataChanged();
 	}
 
+	/**
+	 * Remove a element.
+	 * 
+	 * @param element
+	 *            element to remove
+	 */
 	public void removeElement(Book element) {
 		elements.remove(element);
 		fireTableDataChanged();
 	}
 
+	/**
+	 * Remove all elements.
+	 */
 	public void removeAllElements() {
 		elements.clear();
 		fireTableDataChanged();

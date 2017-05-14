@@ -21,8 +21,8 @@ public class BooksPersistor implements IBookManager {
 	public static final String AUTHOR = "author";
 	public static final String DATE_PUBLISHED = "datePublished";
 
-	private Connection dbConnection;
 	// util
+	private Connection dbConnection;
 	private DateConverter dateConverter;
 	private Logger logger = Logger.getLogger(this.getClass().getCanonicalName());
 
