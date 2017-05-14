@@ -1,4 +1,4 @@
-package com.jeff.booktracker.main.util;
+package com.jeff.booktracker.util;
 
 import java.util.function.Supplier;
 

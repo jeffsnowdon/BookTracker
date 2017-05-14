@@ -26,7 +26,7 @@
 		<constructor-arg index="3" ref="selectedBooksProperty" />
 	</bean>
 
-	<bean id="addBookDialogSupplier" class="com.jeff.booktracker.main.util.BeanSupplier">
+	<bean id="addBookDialogSupplier" class="com.jeff.booktracker.util.BeanSupplier">
 		<constructor-arg index="0">
 			<value>addBookDialog</value>
 		</constructor-arg>
