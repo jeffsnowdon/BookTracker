@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import com.jeff.booktracker.bookshelf.model.Book;
+import com.jeff.booktracker.util.ImageProvider;
 
 public class AddBookDialog extends JDialog {
 
@@ -28,6 +29,7 @@ public class AddBookDialog extends JDialog {
 	}
 
 	private void init() {
+		setIconImage(ImageProvider.notebookAdd.getImage());
 		setupContainer();
 	}
 
