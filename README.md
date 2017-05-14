@@ -1,6 +1,6 @@
 # BookTracker
 
-Persist a collection of Books in a SQL database.
+Persist a collection of Books in a mySQL database.
 
 ### Tech
 
