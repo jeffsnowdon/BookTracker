@@ -26,7 +26,7 @@
 	<bean id="beanSupplier" abstract="true"
 		class="com.jeff.booktracker.util.BeanListSupplier" scope="prototype" />
 
-	<bean id="mySQLSupplier" class="com.jeff.booktracker.main.util.MySQLSupplier">
+	<bean id="mySQLSupplier" class="com.jeff.booktracker.util.MySQLSupplier">
 	</bean>
 
 	<bean id="mySQL" factory-bean="mySQLSupplier" factory-method="get" />

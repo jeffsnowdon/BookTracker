@@ -11,7 +11,7 @@ import org.springframework.beans.factory.BeanFactoryAware;
 
 import com.jeff.booktracker.lifecycle.Disposable;
 import com.jeff.booktracker.lifecycle.Initializable;
-import com.jeff.booktracker.main.util.MySQLSupplier;
+import com.jeff.booktracker.util.MySQLSupplier;
 
 public class DatabaseManager implements Initializable, Disposable, BeanFactoryAware {
 
