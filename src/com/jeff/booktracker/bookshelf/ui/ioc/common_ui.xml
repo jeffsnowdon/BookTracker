@@ -5,7 +5,7 @@
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd"
 	default-lazy-init="true">
 
-	<bean id="bookTrackerMainPanel" class="com.jeff.booktracker.ui.BookTrackerMainPanel">
+	<bean id="bookTrackerMainPanel" class="com.jeff.booktracker.main.ui.BookTrackerMainPanel">
 		<constructor-arg index="0" ref="bookshelfPanel" />
 	</bean>
 

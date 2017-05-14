@@ -10,7 +10,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import com.jeff.booktracker.lifecycle.Initializable;
-import com.jeff.booktracker.ui.BookTrackerMainPanel;
+import com.jeff.booktracker.main.ui.BookTrackerMainPanel;
 import com.jeff.booktracker.util.ImageProvider;
 
 public class GUIInitializer implements Initializable {

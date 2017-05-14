@@ -1,4 +1,4 @@
-package com.jeff.booktracker.ui;
+package com.jeff.booktracker.main.ui;
 
 import java.awt.BorderLayout;
 
