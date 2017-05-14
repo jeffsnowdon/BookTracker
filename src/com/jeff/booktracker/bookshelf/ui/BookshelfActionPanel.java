@@ -15,6 +15,7 @@ import com.jeff.booktracker.bookshelf.model.Book;
 import com.jeff.booktracker.bookshelf.model.IBookManager;
 import com.jeff.booktracker.bookshelf.ui.add.AddBookDialog;
 import com.jeff.booktracker.util.IProperty;
+import com.jeff.booktracker.util.ImageProvider;
 
 public class BookshelfActionPanel extends JPanel {
 
@@ -44,6 +45,7 @@ public class BookshelfActionPanel extends JPanel {
 	}
 
 	private void setupComponents() {
+		addBookButton.setIcon(ImageProvider.notebookAdd);
 		addBookButton.addActionListener(e -> {
 			AddBookDialog addBookDialog = addBookDialogSupplier.get();
 			addBookDialog.setModal(true);
@@ -57,6 +59,7 @@ public class BookshelfActionPanel extends JPanel {
 			}
 		});
 
+		removeBookButton.setIcon(ImageProvider.notebookRemove);
 		removeBookButton.addActionListener(e -> removeSelectedBooks());
 	}
 

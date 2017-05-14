@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import com.jeff.booktracker.lifecycle.Initializable;
 import com.jeff.booktracker.ui.BookTrackerMainPanel;
+import com.jeff.booktracker.util.ImageProvider;
 
 public class GUIInitializer implements Initializable {
 
@@ -17,6 +18,7 @@ public class GUIInitializer implements Initializable {
 
 	@Override
 	public void init() {
+		mainFrame.setIconImage(ImageProvider.notebook);
 		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		mainFrame.setContentPane(bookTrackerMainPanel);
 		mainFrame.pack();
