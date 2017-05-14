@@ -8,5 +8,9 @@
 	<bean id="bookManager" class="com.jeff.booktracker.bookshelf.model.BookManager">
 		<constructor-arg index="0" ref="booksPersistor" />
 	</bean>
+	
+	<bean id="cachedBookManager" class="com.jeff.booktracker.bookshelf.model.CachedBookManager">
+		<constructor-arg index="0" ref="bookManager" />
+	</bean>
 
 </beans>

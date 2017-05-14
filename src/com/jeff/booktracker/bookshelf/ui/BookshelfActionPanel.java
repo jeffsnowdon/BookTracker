@@ -52,7 +52,7 @@ public class BookshelfActionPanel extends JPanel {
 			if (addBookDialog.isOKPressed()) {
 				Book book = addBookDialog.produceBook();
 				if (book != null)
-					addOrUpdateBook(book);
+					addBook(book);
 			}
 		});
 
@@ -68,9 +68,15 @@ public class BookshelfActionPanel extends JPanel {
 		selectedBooksProperty.get().stream().forEach(BookshelfActionPanel.this::removeBook);
 	}
 
-	private void addOrUpdateBook(Book book) {
+	private void addBook(Book book) {
 		try {
-			bookManager.addOrUpdate(book);
+			if (bookManager.getBook(book) != null) {
+				logger.severe("A book already exists with that Title and Author.");
+				JOptionPane.showMessageDialog(frame, "A book already exists with that Title and Author.",
+						"Add Book Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			bookManager.add(book);
 		} catch (SQLException e) {
 			logger.severe("Add book failed - " + book.toString() + " - " + e.toString());
 			JOptionPane.showMessageDialog(frame, "Add book \"" + book.getTitle() + "\" failed - database error.",

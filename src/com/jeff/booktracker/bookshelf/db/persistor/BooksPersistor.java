@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import com.jeff.booktracker.bookshelf.db.persistor.util.DateConverter;
@@ -32,8 +32,8 @@ public class BooksPersistor implements IBookManager {
 	}
 
 	@Override
-	public List<Book> get() {
-		List<Book> books = new ArrayList<>();
+	public Set<Book> get() {
+		Set<Book> books = new HashSet<>();
 		try {
 			Statement statement = dbConnection.createStatement();
 			String query = "SELECT * from " + TABLE;
@@ -52,12 +52,7 @@ public class BooksPersistor implements IBookManager {
 	}
 
 	@Override
-	public void addOrUpdate(Book book) throws SQLException {
-		remove(book);
-		add(book);
-	}
-
-	private void add(Book book) throws SQLException {
+	public void add(Book book) throws SQLException {
 		Statement statement = dbConnection.createStatement();
 		String title = book.getTitle();
 		String author = book.getAuthor();
@@ -83,6 +78,27 @@ public class BooksPersistor implements IBookManager {
 		Statement statement = dbConnection.createStatement();
 		String query = "DELETE FROM " + TABLE;
 		statement.executeQuery(query);
+	}
+
+	@Override
+	public Book getBook(Book book) {
+		Book result = null;
+		try {
+			Statement statement = dbConnection.createStatement();
+			String query = "SELECT * from " + TABLE + " WHERE title='" + book.getTitle() + "' AND author='"
+					+ book.getAuthor() + "'";
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				String title = rs.getString(TITLE);
+				String author = rs.getString(AUTHOR);
+				LocalDate datePublished = dateConverter.toLocalDate(rs.getDate(DATE_PUBLISHED));
+				result = new Book(title, author, datePublished);
+			}
+
+		} catch (SQLException e) {
+			logger.severe(e.toString());
+		}
+		return result;
 	}
 
 }
