@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -21,17 +22,17 @@ public class BookshelfActionPanel extends JPanel {
 	private Frame frame;
 	private JButton addBookButton = new JButton("Add Book");
 	private JButton removeBookButton = new JButton("Remove Book");
-	private AddBookDialog addBookDialog;
+	private Supplier<AddBookDialog> addBookDialogSupplier;
 	// model
 	private IBookManager bookManager;
 	private IProperty<List<Book>> selectedBooksProperty;
 	// util
 	private Logger logger = Logger.getLogger(this.getClass().getCanonicalName());
 
-	public BookshelfActionPanel(Frame frame, AddBookDialog addBookDialog, IBookManager bookManager,
+	public BookshelfActionPanel(Frame frame, Supplier<AddBookDialog> addBookDialogSupplier, IBookManager bookManager,
 			IProperty<List<Book>> selectedBooksProperty) {
 		this.frame = frame;
-		this.addBookDialog = addBookDialog;
+		this.addBookDialogSupplier = addBookDialogSupplier;
 		this.bookManager = bookManager;
 		this.selectedBooksProperty = selectedBooksProperty;
 		init();
@@ -44,8 +45,8 @@ public class BookshelfActionPanel extends JPanel {
 
 	private void setupComponents() {
 		addBookButton.addActionListener(e -> {
+			AddBookDialog addBookDialog = addBookDialogSupplier.get();
 			addBookDialog.setModal(true);
-			addBookDialog.reset();
 			addBookDialog.pack();
 			addBookDialog.setLocationRelativeTo(frame);
 			addBookDialog.setVisible(true);

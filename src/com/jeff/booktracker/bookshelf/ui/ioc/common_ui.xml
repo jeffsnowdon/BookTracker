@@ -21,17 +21,23 @@
 
 	<bean id="bookshelfActionPanel" class="com.jeff.booktracker.bookshelf.ui.BookshelfActionPanel">
 		<constructor-arg index="0" ref="mainFrame" />
-		<constructor-arg index="1" ref="addBookDialog" />
+		<constructor-arg index="1" ref="addBookDialogSupplier" />
 		<constructor-arg index="2" ref="cachedBookManager" />
 		<constructor-arg index="3" ref="selectedBooksProperty" />
 	</bean>
-	
-	<bean id="addBookDialog" class="com.jeff.booktracker.bookshelf.ui.add.AddBookDialog">
+
+	<bean id="addBookDialogSupplier" class="com.jeff.booktracker.main.util.BeanSupplier">
+		<constructor-arg index="0">
+			<value>addBookDialog</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="addBookDialog" class="com.jeff.booktracker.bookshelf.ui.add.AddBookDialog" scope="prototype">
 		<constructor-arg index="0" ref="mainFrame" />
 		<constructor-arg index="1" ref="addBookPanel" />
 	</bean>
 
-	<bean id="addBookPanel" class="com.jeff.booktracker.bookshelf.ui.add.AddBookPanel">
+	<bean id="addBookPanel" class="com.jeff.booktracker.bookshelf.ui.add.AddBookPanel" scope="prototype">
 		<constructor-arg index="0" ref="mainFrame"></constructor-arg>
 	</bean>
 

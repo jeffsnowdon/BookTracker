@@ -35,10 +35,6 @@ public class AddBookDialog extends JDialog {
 		return okPressed;
 	}
 
-	public void reset() {
-		okPressed = false;
-	}
-
 	private void setupContainer() {
 		setLayout(new BorderLayout());
 		add(addBookPanel, BorderLayout.CENTER);
