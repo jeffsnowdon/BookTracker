@@ -58,8 +58,8 @@ public class BookManager implements IBookManager {
 	}
 
 	@Override
-	public Book getBook(Book book) {
-		return booksPersistor.getBook(book);
+	public boolean containsBook(Book book) {
+		return booksPersistor.containsBook(book);
 	}
 
 }

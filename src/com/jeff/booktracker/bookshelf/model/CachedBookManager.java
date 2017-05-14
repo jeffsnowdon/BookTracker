@@ -62,10 +62,8 @@ public class CachedBookManager implements IBookManager {
 	}
 
 	@Override
-	public Book getBook(Book book) {
-		if (books.contains(book))
-			return book;
-		return null;
+	public boolean containsBook(Book book) {
+		return books.contains(book);
 	}
 
 }

@@ -74,7 +74,7 @@ public class BookshelfActionPanel extends JPanel {
 
 	private void addBook(Book book) {
 		try {
-			if (bookManager.getBook(book) != null) {
+			if (bookManager.containsBook(book)) {
 				logger.severe("A book already exists with that Title and Author.");
 				JOptionPane.showMessageDialog(frame, "A book already exists with that Title and Author.",
 						"Add Book Error", JOptionPane.ERROR_MESSAGE);

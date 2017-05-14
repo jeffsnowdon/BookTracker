@@ -81,7 +81,7 @@ public class BooksPersistor implements IBookManager {
 	}
 
 	@Override
-	public Book getBook(Book book) {
+	public boolean containsBook(Book book) {
 		Book result = null;
 		try {
 			Statement statement = dbConnection.createStatement();
@@ -98,7 +98,7 @@ public class BooksPersistor implements IBookManager {
 		} catch (SQLException e) {
 			logger.severe(e.toString());
 		}
-		return result;
+		return result != null;
 	}
 
 }
