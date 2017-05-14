@@ -71,14 +71,13 @@ public class DatabaseManager implements Initializable, Disposable, BeanFactoryAw
 		if (databaseProcess != null) {
 			// database process was created my this application
 			databaseProcess.destroy();
-		} else {
-			// try to kill a potential dangling database process
-			ProcessBuilder pb = new ProcessBuilder(DATABASE_SHUTDOWN_CMD, "/im", DATABASE_START_CMD, "/f");
-			try {
-				pb.start();
-			} catch (Exception e) {
-				System.out.println(e.toString());
-			}
+		}
+		// try to kill a potential dangling database process
+		ProcessBuilder pb = new ProcessBuilder(DATABASE_SHUTDOWN_CMD, "/im", DATABASE_START_CMD, "/f");
+		try {
+			pb.start();
+		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 
 	}

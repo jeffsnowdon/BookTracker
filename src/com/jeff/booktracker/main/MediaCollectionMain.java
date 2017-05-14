@@ -40,14 +40,14 @@ public class MediaCollectionMain {
 		startupDatabase();
 		startupApplication();
 	}
-	
+
 	private void shutdownDatabase() {
 		if (databaseManager != null)
 			databaseManager.dispose();
 	}
-	
-	private void startupDatabase(){
-		DatabaseManager databaseManager = (DatabaseManager) applicationContext.getBean("databaseManager");
+
+	private void startupDatabase() {
+		databaseManager = (DatabaseManager) applicationContext.getBean("databaseManager");
 		databaseManager.init();
 	}
 
