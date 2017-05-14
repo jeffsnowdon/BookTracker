@@ -9,12 +9,12 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-public class BeanSupplier<T> implements Supplier<List<T>>, ApplicationContextAware {
+public class BeanListSupplier<T> implements Supplier<List<T>>, ApplicationContextAware {
 
 	private Class<T> classType;
 	private ApplicationContext applicationContext;
 
-	public BeanSupplier(Class<T> classType) {
+	public BeanListSupplier(Class<T> classType) {
 		this.classType = classType;
 	}
 
